@@ -24,8 +24,7 @@ class TestRepository < Test::Unit::TestCase
   end
 
   def test_repository_bare_clone
-    options = Ggit::CloneOptions.new
-    options.set_is_bare(true)
+    options = Ggit::CloneOptions.new(:bare => true)
     url = "https://github.com/ruby-gnome2/ggit.git"
     destination = Gio::File.path("#{@path}/ggit-clone-bare")
     Ggit::Repository.clone(url, destination, options)
@@ -33,8 +32,7 @@ class TestRepository < Test::Unit::TestCase
   end
 
   def test_repository_checkout_clone
-    options = Ggit::CloneOptions.new
-    options.set_checkout_branch("master")
+    options = Ggit::CloneOptions.new(:checkout_branch => "master")
     url = "https://github.com/ruby-gnome2/ggit.git"
     destination = Gio::File.path("#{@path}/ggit-clone-checkout")
     Ggit::Repository.clone(url, destination, options)
