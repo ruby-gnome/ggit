@@ -18,6 +18,7 @@ class TestRepository < Test::Unit::TestCase
   def setup
     @path = File.expand_path(File.dirname(__FILE__))
     FileUtils.mkdir_p("#{@path}/non_bare_repo/test")
+    @url = "https://github.com/ruby-gnome2/ggit.git"
   end
 
   def test_repository_init_non_bare_repository
@@ -28,31 +29,34 @@ class TestRepository < Test::Unit::TestCase
 
   def test_repository_init_bare_repository
     dir = Gio::File.path("#{@path}/bare_repo/test/.git")
-    Ggit::Repository.init_repository(dir, true)
+    repo = Ggit::Repository.init_repository(dir, true)
     assert(File.exist?(@path + "/bare_repo/test/.git/config"))
+    assert(repo.empty?)
   end
 
   def test_repository_clone
-    url = "https://github.com/ruby-gnome2/ggit.git"
     destination = Gio::File.path("#{@path}/ggit-clone")
-    Ggit::Repository.clone(url, destination)
+    repo = Ggit::Repository.clone(@url, destination)
     assert(File.exist?(@path + "/ggit-clone/.git/config"))
+    assert_false(repo.empty?)
+    assert_false(repo.bare?)
   end
 
   def test_repository_bare_clone
     options = Ggit::CloneOptions.new(:bare => true)
-    url = "https://github.com/ruby-gnome2/ggit.git"
     destination = Gio::File.path("#{@path}/ggit-clone-bare")
-    Ggit::Repository.clone(url, destination, options)
+    repo = Ggit::Repository.clone(@url, destination, options)
     assert(File.exist?(@path + "/ggit-clone-bare/config"))
+    assert_false(repo.empty?)
+    assert(repo.bare?)
   end
 
   def test_repository_checkout_clone
     options = Ggit::CloneOptions.new(:checkout_branch => "master")
-    url = "https://github.com/ruby-gnome2/ggit.git"
     destination = Gio::File.path("#{@path}/ggit-clone-checkout")
-    Ggit::Repository.clone(url, destination, options)
+    repo = Ggit::Repository.clone(@url, destination, options)
     assert(File.exist?(@path + "/ggit-clone-checkout/.git/config"))
+    assert_false(repo.empty?)
   end
 
   def cleanup
