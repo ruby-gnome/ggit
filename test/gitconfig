@@ -1,0 +1,11 @@
+[user]
+	name = jeanclaude
+	email = jeanclaude@gmx.com
+[core]
+	excludesfile = gitignore
+	autocrlf = input
+[alias]
+	unstage = reset HEAD --
+	last = log -1 HEAD
+[diff]
+	tool = vimdiff
