@@ -40,6 +40,7 @@ module Ggit
     def require_libraries
       require "ggit/diff"
       require "ggit/clone-options"
+      require "ggit/config"
     end
   end
 end
