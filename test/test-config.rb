@@ -20,7 +20,7 @@ class TestConfig < Test::Unit::TestCase
     FileUtils.mkdir_p("#{@path}/config")
     FileUtils.cp("#{@path}/gitconfig", "#{@path}/config/")
     @config_file_path = "#{@path}/config/gitconfig"
-    @file = Gio::File.path(@config_file_path)
+    @file = Gio::File.open(:path => @config_file_path)
     puts @file.path
   end
 

@@ -22,20 +22,20 @@ class TestRepository < Test::Unit::TestCase
   end
 
   def test_repository_init_non_bare_repository
-    dir = Gio::File.path("#{@path}/non_bare_repo/test")
+    dir = Gio::File.open(:path => "#{@path}/non_bare_repo/test")
     Ggit::Repository.init_repository(dir, false)
     assert(File.exist?(@path + "/non_bare_repo/test/.git/config"))
   end
 
   def test_repository_init_bare_repository
-    dir = Gio::File.path("#{@path}/bare_repo/test/.git")
+    dir = Gio::File.open(:path => "#{@path}/bare_repo/test/.git")
     repo = Ggit::Repository.init_repository(dir, true)
     assert(File.exist?(@path + "/bare_repo/test/.git/config"))
     assert(repo.empty?)
   end
 
   def test_repository_clone
-    destination = Gio::File.path("#{@path}/ggit-clone")
+    destination = Gio::File.open(:path => "#{@path}/ggit-clone")
     repo = Ggit::Repository.clone(@url, destination)
     assert(File.exist?(@path + "/ggit-clone/.git/config"))
     assert_false(repo.empty?)
@@ -44,7 +44,7 @@ class TestRepository < Test::Unit::TestCase
 
   def test_repository_bare_clone
     options = Ggit::CloneOptions.new(:bare => true)
-    destination = Gio::File.path("#{@path}/ggit-clone-bare")
+    destination = Gio::File.open(:path => "#{@path}/ggit-clone-bare")
     repo = Ggit::Repository.clone(@url, destination, options)
     assert(File.exist?(@path + "/ggit-clone-bare/config"))
     assert_false(repo.empty?)
@@ -53,7 +53,7 @@ class TestRepository < Test::Unit::TestCase
 
   def test_repository_checkout_clone
     options = Ggit::CloneOptions.new(:checkout_branch => "master")
-    destination = Gio::File.path("#{@path}/ggit-clone-checkout")
+    destination = Gio::File.open(:path => "#{@path}/ggit-clone-checkout")
     repo = Ggit::Repository.clone(@url, destination, options)
     assert(File.exist?(@path + "/ggit-clone-checkout/.git/config"))
     assert_false(repo.empty?)
