@@ -26,15 +26,17 @@ class TestConfig < Test::Unit::TestCase
 
   def test_new_config_from_file
     conf = Ggit::Config.new(:file => @file)
-    user = conf.get_string("user.name")
-    assert_equal("name", user)
+    snapshot = conf.snapshot
+    user = snapshot.get_string("user.name")
+    assert_equal("jean-claude", user)
   end
 
-  def test_new_config
+  def test_new_config_add_file
     conf = Ggit::Config.new
     conf.add_file(@file, :local, true)
-    user = conf.get_string("user.name")
-    assert_equal("name", user)
+    snapshot = conf.snapshot
+    user = snapshot.get_string("user.name")
+    assert_equal("jean-claude", user)
   end
 
   def cleanup
