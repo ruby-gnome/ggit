@@ -21,7 +21,6 @@ class TestConfig < Test::Unit::TestCase
     FileUtils.cp("#{@path}/gitconfig", "#{@path}/config/")
     @config_file_path = "#{@path}/config/gitconfig"
     @file = Gio::File.open(:path => @config_file_path)
-    puts @file.path
   end
 
   def test_new_config_from_file
