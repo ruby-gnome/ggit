@@ -39,6 +39,17 @@ class TestConfig < Test::Unit::TestCase
     assert_equal("jean-claude", user)
   end
 
+  def test_config_add_new_value
+    conf = Ggit::Config.new
+    conf.add_file(@file, :local, true)
+    conf.set_string("core.editor", "vim")
+    conf = Ggit::Config.new
+    conf.add_file(@file, :local, true)
+    snapshot = conf.snapshot
+    editor = snapshot.get_string("core.editor")
+    assert_equal("vim", editor)
+  end
+
   def cleanup
     FileUtils.rm_rf("#{@path}/config")
   end
