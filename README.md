@@ -1,6 +1,8 @@
 # ruby-ggit
-<p style="color: brown">This projet is currently held in abeyance due to
-a lack of time. Feel free to contribute and extend it.</p>
+
+**This projet is currently held in abeyance due to
+a lack of time. Feel free to contribute and extend it.**
+
 
 Ruby loader for [libgit2-glib](https://git.gnome.org/browse/libgit2-glib) based on the ruby gobject-introspection gem from the
 [ruby-GNOME2](https://github.com/ruby-gnome2/ruby-gnome2) project.
@@ -46,7 +48,7 @@ Ggit::Repository.clone(url, destination)
 
 ## License
 
-Copyright (c) 2016-2017 Ruby-GNOME2 Project Team
+Copyright (c) 2016-2018 Ruby-GNOME2 Project Team
 
 This program is free software. You can distribute/modify this program
 under the terms of the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.
